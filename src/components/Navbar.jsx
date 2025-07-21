@@ -26,6 +26,7 @@ function Navbar() {
                 src="./wolf.png" // Using the provided wolf.png
                 alt="The Lake Mount Hotel Logo"
                 className="h-16 md:h-20 w-auto rounded-full shadow-md transition-transform duration-300 hover:scale-105" // Larger, more prominent logo
+                
               />
             </Link>
           </div>
@@ -149,8 +150,14 @@ function Navbar() {
 
       {/* Mobile Menu Panel (All links visible) */}
       <div className={`fixed inset-y-0 left-0 w-64 bg-[var(--color-neutral-light)] border-r border-[var(--color-border-light)] shadow-lg transform transition-transform duration-300 ease-in-out z-40 lg:hidden
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`} id="mobile-menu">
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`} id="mobile-menu"
+        style={{ backgroundImage: "url('wolf.png')",backgroundPosition:"-100px -250px",backgroundRepeat:"no-repeat"}}
+        >
+          
         <div className="px-2 pt-20 pb-3 space-y-1 sm:px-3"> {/* Adjusted padding for logo space */}
+          
+              
+          
           <NavLink
             to="/"
             onClick={closeAllMenus}
