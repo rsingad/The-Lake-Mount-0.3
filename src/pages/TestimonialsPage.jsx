@@ -10,6 +10,7 @@ function TestimonialsSection() {
       author: "Priya Sharma",
       location: "Mumbai, India",
       rating: 5,
+      profileImage: "https://placehold.co/80x80/74512D/F8F4E1?text=PS" // Placeholder image for Priya Sharma
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ function TestimonialsSection() {
       author: "Rahul Gupta",
       location: "Delhi, India",
       rating: 5,
+      profileImage: "https://placehold.co/80x80/FEBA17/4E1F00?text=RG" // Placeholder image for Rahul Gupta
     },
     {
       id: 3,
@@ -24,6 +26,7 @@ function TestimonialsSection() {
       author: "Anjali Singh",
       location: "Bengaluru, India",
       rating: 4,
+      profileImage: "https://placehold.co/80x80/4E1F00/F8F4E1?text=AS" // Placeholder image for Anjali Singh
     },
     {
       id: 4,
@@ -31,6 +34,7 @@ function TestimonialsSection() {
       author: "Vikram Kumar",
       location: "Hyderabad, India",
       rating: 5,
+      profileImage: "https://placehold.co/80x80/E5DED5/4E1F00?text=VK" // Placeholder image for Vikram Kumar
     },
     {
       id: 5,
@@ -38,6 +42,7 @@ function TestimonialsSection() {
       author: "Sneha Reddy",
       location: "Chennai, India",
       rating: 5,
+      profileImage: "https://placehold.co/80x80/F8F4E1/74512D?text=SR" // Placeholder image for Sneha Reddy
     },
     {
       id: 6,
@@ -45,6 +50,7 @@ function TestimonialsSection() {
       author: "Arjun Desai",
       location: "Ahmedabad, India",
       rating: 4,
+      profileImage: "https://placehold.co/80x80/74512D/FEBA17?text=AD" // Placeholder image for Arjun Desai
     },
   ];
 
@@ -57,7 +63,7 @@ function TestimonialsSection() {
       stars.push(
         <i
           key={i}
-          className={`fas fa-star ${i < rating ? 'text-secondary-gold' : 'text-gray-300'}`}
+          className={`fas fa-star ${i < rating ? 'text-[var(--color-secondary-gold)]' : 'text-gray-300'}`}
         ></i>
       );
     }
@@ -89,13 +95,13 @@ function TestimonialsSection() {
 
   if (testimonialsData.length === 0) {
     return (
-      <section className="py-20 md:py-32 bg-neutral-light font-sans">
+      <section className="py-20 md:py-32 bg-[var(--color-neutral-light)] font-sans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark text-center mb-16 relative pb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-neutral-dark)] text-center mb-16 relative pb-4">
             <span className="relative z-10">What Our Cherished Guests Say</span>
-            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-secondary-gold rounded-full opacity-80"></span>
+            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span>
           </h2>
-          <div className="text-center text-text-dark text-xl p-10 bg-white rounded-2xl shadow-lg border border-border-light">
+          <div className="text-center text-[var(--color-text-dark)] text-xl p-10 bg-white rounded-2xl shadow-lg border border-[var(--color-border-light)]">
             <p className="font-semibold">No testimonials available at the moment. Check back soon for heartwarming feedback!</p>
           </div>
         </div>
@@ -106,44 +112,58 @@ function TestimonialsSection() {
   const currentTestimonial = testimonialsData[currentIndex];
 
   return (
-    <section className="py-20 md:py-32 bg-neutral-light font-sans relative overflow-hidden"> {/* Added relative and overflow-hidden */}
+    <section className="py-20 md:py-32 bg-[var(--color-neutral-light)] font-sans relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark text-center mb-16 relative pb-4">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-neutral-dark)] text-center mb-16 relative pb-4">
           <span className="relative z-10">What Our Cherished Guests Say</span>
-          <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-secondary-gold rounded-full opacity-80"></span>
+          <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span>
         </h2>
 
-        <div className="relative flex items-center justify-center"> {/* Flex container for slider and navigation */}
+        <div className="relative flex items-center justify-center">
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 md:-left-12 lg:-left-20 z-20 p-4 rounded-full bg-primary-blue text-white shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-blue"
+            className="absolute left-0 md:-left-12 lg:-left-20 z-20 p-4 rounded-full bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)] shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)]"
             aria-label="Previous testimonial"
           >
-            <i className="fas fa-chevron-left text-black text-xl"></i>
+            <i className="fas fa-chevron-left text-xl"></i>
           </button>
 
           {/* Testimonial Card */}
+          {/* Added animate-fade-in for a smoother entry animation */}
           <div
-            key={currentTestimonial.id} // Key change for re-render and transition trigger
-            className="bg-white rounded-2xl shadow-3xl p-10 transform transition-all duration-700 ease-in-out flex flex-col justify-between border border-border-light max-w-3xl w-full" // Added max-w and w-full
+            key={currentTestimonial.id}
+            className="bg-white rounded-2xl shadow-3xl p-10 transform transition-all duration-700 ease-in-out flex flex-col justify-between border border-[var(--color-border-light)] max-w-3xl w-full animate-fade-in"
           >
-            {renderStars(currentTestimonial.rating)}
-            <p className="text-text-dark text-xl md:text-lg italic mb-8 text-center font-serif leading-relaxed">
+            <div className="flex flex-col items-center mb-6">
+              {currentTestimonial.profileImage ? (
+                <img
+                  src={currentTestimonial.profileImage}
+                  alt={currentTestimonial.author}
+                  className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[var(--color-secondary-gold)] shadow-md"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-full bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)] flex items-center justify-center text-3xl font-bold mb-4 shadow-md">
+                  {currentTestimonial.author.charAt(0)}
+                </div>
+              )}
+              {renderStars(currentTestimonial.rating)}
+            </div>
+            <p className="text-[var(--color-text-dark)] text-xl md:text-lg italic mb-8 text-center font-serif leading-relaxed">
               "{currentTestimonial.quote}"
             </p>
-            <div className="text-center mt-auto border-t border-border-light pt-6">
-              <p className="text-primary-blue font-extrabold text-xl mb-1">{currentTestimonial.author}</p>
-              <p className="text-text-dark opacity-80 text-sm font-medium">{currentTestimonial.location}</p>
+            <div className="text-center mt-auto border-t border-[var(--color-border-light)] pt-6">
+              <p className="text-[var(--color-primary-brown)] font-extrabold text-xl mb-1">{currentTestimonial.author}</p>
+              <p className="text-[var(--color-text-dark)] opacity-80 text-sm font-medium">{currentTestimonial.location}</p>
             </div>
           </div>
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 md:-right-12 lg:-right-20 z-20 p-4 rounded-full bg-primary-blue text-white shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary-blue"
+            className="absolute right-0 md:-right-12 lg:-right-20 z-20 p-4 rounded-full bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)] shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)]"
             aria-label="Next testimonial"
           >
-            <i className="fas fa-chevron-right text-xl text-black"></i>
+            <i className="fas fa-chevron-right text-xl"></i>
           </button>
         </div>
 
@@ -153,9 +173,9 @@ function TestimonialsSection() {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentIndex === index ? 'bg-black scale-125' : 'bg-gray-300 hover:bg-gray-400'
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 border border-[var(--color-primary-brown)] shadow-sm
+                ${currentIndex === index ? 'bg-[var(--color-primary-brown)] scale-125' : 'bg-[var(--color-border-light)] hover:bg-[var(--color-secondary-gold)]'}` // Improved inactive dot styling
+              }
               aria-label={`Go to testimonial ${index + 1}`}
             ></button>
           ))}

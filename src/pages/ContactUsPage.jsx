@@ -9,7 +9,7 @@ function ContactPage() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState(null); // { type: 'success' | 'error', text: '...' }
+  const [submitMessage, setSubmitMessage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,19 +24,15 @@ function ContactPage() {
     setIsSubmitting(true);
     setSubmitMessage(null);
 
-    // Simulate a network request (e.g., to a backend)
-    // In a real application, you would send this data to your API using axios or fetch
     try {
-      // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Simulate success or error based on some condition (e.g., email format)
       if (formData.email.includes('@') && formData.name.length > 2 && formData.message.length > 10) {
         setSubmitMessage({
           type: 'success',
           text: 'Thank you for your inquiry! Our team will get back to you shortly.',
         });
-        setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setSubmitMessage({
           type: 'error',
@@ -54,13 +50,13 @@ function ContactPage() {
   };
 
   return (
-    <div className="bg-neutral-light min-h-screen font-sans">
+    <div className="bg-[var(--color-neutral-light)] min-h-screen font-sans">
       {/* Contact Hero Banner */}
       <section
         className="relative h-72 md:h-96 lg:h-[500px] bg-cover bg-center flex items-center justify-center text-white overflow-hidden"
-        style={{ backgroundImage: "url('https://images.pexels.com/photos/20791613/pexels-photo-20791613.jpeg')" }} // Ensure this high-quality image exists
+        style={{ backgroundImage: "url('https://images.pexels.com/photos/20791613/pexels-photo-20791613.jpeg')" }}
       >
-        <div className="absolute inset-0 bg-neutral-dark opacity-60"></div> {/* Deeper, richer overlay */}
+        <div className="absolute inset-0 bg-[var(--color-neutral-dark)] opacity-60"></div>
         <div className="relative z-10 text-center p-4 animate-fade-in-up">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold drop-shadow-2xl leading-tight tracking-wider">
             Connect With Us
@@ -74,45 +70,49 @@ function ContactPage() {
       {/* Contact Information & Form Section */}
       <section className="py-16 md:py-24 bg-white shadow-inner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Information */}
-          <div className="bg-neutral-light p-10 rounded-2xl shadow-3xl border border-border-light"> {/* Premium card style */}
-            <h2 className="text-4xl font-extrabold text-neutral-dark mb-8 relative pb-4">
+          
+          {/* Contact Information - Improved Cards */}
+          <div className="bg-[var(--color-neutral-light)] p-10 rounded-2xl shadow-3xl border border-[var(--color-border-light)] animate-fade-in-left">
+            <h2 className="text-4xl font-extrabold text-[var(--color-neutral-dark)] mb-8 relative pb-4">
               <span className="relative z-10">Get in Touch</span>
-              <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-secondary-gold rounded-full opacity-80"></span> {/* Gold underline */}
+              <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span>
             </h2>
-            <p className="text-text-dark text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--color-text-dark)] text-lg mb-8 leading-relaxed">
               Have questions about your upcoming stay, planning an event, or any other inquiries? We are here to provide comprehensive assistance and ensure your experience is seamless.
             </p>
 
-            <div className="space-y-8"> {/* Increased space-y */}
-              <div className="flex items-start">
-                <i className="fas fa-map-marker-alt text-primary-blue text-3xl mr-5 flex-shrink-0 mt-1"></i> {/* Larger icon, primary-blue */}
+            <div className="grid grid-cols-1 gap-8">
+              {/* Location Card */}
+              <div className="flex items-center bg-white rounded-xl shadow-md p-6 border border-[var(--color-border-light)] transition transform hover:scale-[1.02]">
+                <i className="fas fa-map-marker-alt text-[var(--color-primary-brown)] text-4xl mr-6"></i>
                 <div>
-                  <h3 className="font-semibold text-neutral-dark text-xl mb-1">Our Location</h3> {/* Darker text */}
-                  <p className="text-text-dark text-lg">
-                    The Lake Mount Hotel,
-                    <br /> Serene Lake Road, Bhambori,
-                    <br /> Rajasthan, India - 302001
+                  <h3 className="font-bold text-xl text-[var(--color-neutral-dark)] mb-1">Our Location</h3>
+                  <p className="text-[var(--color-text-dark)]">
+                    The Lake Mount Hotel,<br />
+                    Serene Lake Road, Bhambori,<br />
+                    Rajasthan, India - 302001
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <i className="fas fa-phone-alt text-primary-blue text-3xl mr-5 flex-shrink-0 mt-1"></i> {/* Larger icon, primary-blue */}
+              {/* Phone Card */}
+              <div className="flex items-center bg-white rounded-xl shadow-md p-6 border border-[var(--color-border-light)] transition transform hover:scale-[1.02]">
+                <i className="fas fa-phone-alt text-[var(--color-primary-brown)] text-3xl mr-6"></i>
                 <div>
-                  <h3 className="font-semibold text-neutral-dark text-xl mb-1">Call Us</h3> {/* Darker text */}
-                  <p className="text-text-dark text-lg">
-                    <a href="tel:+911234567890" className="hover:text-primary-blue transition-colors duration-300 font-medium">+91 12345 67890</a>
+                  <h3 className="font-bold text-xl text-[var(--color-neutral-dark)] mb-1">Call Us</h3>
+                  <p className="text-[var(--color-text-dark)]">
+                    <a href="tel:+911234567890" className="hover:text-[var(--color-primary-brown)] transition-colors duration-300 font-medium">+91 12345 67890</a>
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start">
-                <i className="fas fa-envelope text-primary-blue text-3xl mr-5 flex-shrink-0 mt-1"></i> {/* Larger icon, primary-blue */}
+              {/* Email Card */}
+              <div className="flex items-center bg-white rounded-xl shadow-md p-6 border border-[var(--color-border-light)] transition transform hover:scale-[1.02]">
+                <i className="fas fa-envelope text-[var(--color-primary-brown)] text-3xl mr-6"></i>
                 <div>
-                  <h3 className="font-semibold text-neutral-dark text-xl mb-1">Email Us</h3> {/* Darker text */}
-                  <p className="text-text-dark text-lg">
-                    <a href="mailto:info@lakemounthotel.com" className="hover:text-primary-blue transition-colors duration-300 font-medium">info@lakemounthotel.com</a>
+                  <h3 className="font-bold text-xl text-[var(--color-neutral-dark)] mb-1">Email Us</h3>
+                  <p className="text-[var(--color-text-dark)]">
+                    <a href="mailto:info@lakemounthotel.com" className="hover:text-[var(--color-primary-brown)] transition-colors duration-300 font-medium">info@lakemounthotel.com</a>
                   </p>
                 </div>
               </div>
@@ -120,62 +120,33 @@ function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white p-10 rounded-2xl shadow-3xl border border-border-light"> {/* Premium card style */}
-            <h2 className="text-4xl font-extrabold text-neutral-dark mb-8 text-center relative pb-4">
+          <div className="bg-white p-10 rounded-2xl shadow-3xl border border-[var(--color-border-light)] animate-fade-in-right">
+            <h2 className="text-4xl font-extrabold text-[var(--color-neutral-dark)] mb-8 text-center relative pb-4">
               <span className="relative z-10">Send Us a Message</span>
-              <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-primary-blue rounded-full opacity-80"></span> {/* Blue underline */}
+              <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-[var(--color-primary-brown)] rounded-full opacity-80"></span>
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Form Fields */}
+              {['name', 'email', 'subject'].map((field) => (
+                <div key={field}>
+                  <label htmlFor={field} className="block text-[var(--color-text-dark)] text-lg font-semibold mb-2">
+                    {`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                  </label>
+                  <input
+                    type={field === 'email' ? 'email' : 'text'}
+                    id={field}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    required
+                    className="shadow-sm appearance-none border border-[var(--color-border-light)] rounded-lg w-full py-3 px-4 text-[var(--color-text-dark)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 placeholder-[var(--color-text-dark)] placeholder-opacity-60"
+                    placeholder={`Enter your ${field}`}
+                  />
+                </div>
+              ))}
+              {/* Message Field */}
               <div>
-                <label htmlFor="name" className="block text-text-dark text-lg font-semibold mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="shadow-sm appearance-none border border-border-light rounded-lg w-full py-3 px-4 text-text-dark leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 placeholder-neutral-dark placeholder-opacity-60"
-                  placeholder="Enter your full name"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-text-dark text-lg font-semibold mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="shadow-sm appearance-none border border-border-light rounded-lg w-full py-3 px-4 text-text-dark leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 placeholder-neutral-dark placeholder-opacity-60"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-text-dark text-lg font-semibold mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="shadow-sm appearance-none border border-border-light rounded-lg w-full py-3 px-4 text-text-dark leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 placeholder-neutral-dark placeholder-opacity-60"
-                  placeholder="Regarding your booking, event, etc."
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-text-dark text-lg font-semibold mb-2">
+                <label htmlFor="message" className="block text-[var(--color-text-dark)] text-lg font-semibold mb-2">
                   Your Message
                 </label>
                 <textarea
@@ -183,34 +154,36 @@ function ContactPage() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows="6" // Increased rows for more space
+                  rows="6"
                   required
-                  className="shadow-sm appearance-none border border-border-light rounded-lg w-full py-3 px-4 text-text-dark leading-tight focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 resize-y placeholder-neutral-dark placeholder-opacity-60"
+                  className="shadow-sm appearance-none border border-[var(--color-border-light)] rounded-lg w-full py-3 px-4 text-[var(--color-text-dark)] leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 resize-y placeholder-[var(--color-text-dark)] placeholder-opacity-60"
                   placeholder="Type your detailed message here..."
                 ></textarea>
               </div>
 
+              {/* Submit Message */}
               {submitMessage && (
                 <div
                   className={`p-4 rounded-lg text-base font-medium ${
                     submitMessage.type === 'success'
                       ? 'bg-green-50 text-green-800 border border-green-200'
                       : 'bg-red-50 text-red-800 border border-red-200'
-                  } mb-4 animate-fade-in`} // Enhanced styling and animation
+                  } mb-4 animate-fade-in`}
                   role="alert"
                 >
                   {submitMessage.text}
                 </div>
               )}
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary-blue text-neutral-light px-8 py-4 rounded-full text-lg font-bold tracking-wide hover:bg-opacity-90 hover:scale-105 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center shadow-xl"
+                className="w-full bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)] px-8 py-4 rounded-full text-lg font-bold tracking-wide hover:bg-opacity-90 hover:scale-105 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center shadow-xl"
               >
                 {isSubmitting ? (
                   <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-neutral-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-[var(--color-neutral-light)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -226,18 +199,17 @@ function ContactPage() {
       </section>
 
       {/* Google Map Section */}
-      <section className="py-16 md:py-24 bg-neutral-light border-t border-border-light">
+      <section className="py-16 md:py-24 bg-[var(--color-neutral-light)] border-t border-[var(--color-border-light)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark mb-16 relative pb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-neutral-dark)] mb-16 relative pb-4">
             <span className="relative z-10">Locate Us Easily</span>
-            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-secondary-gold rounded-full opacity-80"></span> {/* Gold underline */}
+            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span>
           </h2>
-          <div className="bg-white rounded-2xl shadow-3xl overflow-hidden border border-border-light"> {/* Premium map container */}
-            {/* Replace this iframe with your actual Google Maps embed code for The Lake Mount Hotel in Bhambori, Rajasthan */}
+          <div className="bg-white rounded-2xl shadow-3xl overflow-hidden border border-[var(--color-border-light)]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.839845344381!2d75.8239069!3d26.822295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396dbf5c5b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sThe%20Lake%20Mount%20Hotel%2C%20Bhambori%2C%20Rajasthan%2C%20India!5e0!3m2!1sen!2sin!4v1701999999999!5m2!1sen!2sin"
               width="100%"
-              height="550" // Increased height for better visibility
+              height="550"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"

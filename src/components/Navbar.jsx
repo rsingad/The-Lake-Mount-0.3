@@ -4,167 +4,87 @@ import { Link, NavLink } from 'react-router-dom';
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isHotelDropdownOpen, setIsHotelDropdownOpen] = useState(false);
-  const [isDiningDropdownOpen, setIsDiningDropdownOpen] = useState(false);
-  const [isExploreDropdownOpen, setIsExploreDropdownOpen] = useState(false);
 
   // Function to close all menus
   const closeAllMenus = () => {
     setIsMobileMenuOpen(false);
-    setIsHotelDropdownOpen(false);
-    setIsDiningDropdownOpen(false);
-    setIsExploreDropdownOpen(false);
   };
 
   // Function to toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Close any open desktop dropdowns when mobile menu opens/closes
-    setIsHotelDropdownOpen(false);
-    setIsDiningDropdownOpen(false);
-    setIsExploreDropdownOpen(false);
   };
-
-  // Function to toggle specific dropdowns, closing others
-  const toggleDropdown = (dropdownSetter, isOpen) => {
-    setIsHotelDropdownOpen(false);
-    setIsDiningDropdownOpen(false);
-    setIsExploreDropdownOpen(false);
-    dropdownSetter(!isOpen);
-  };
-
 
   return (
-    <nav className="bg-white shadow-xl sticky top-0 z-50 font-sans"> {/* Changed background, enhanced shadow */}
+    <nav className="bg-[var(--color-neutral-light)] shadow-lg sticky top-0 z-50 font-sans transition-all duration-300"> {/* Uses CSS variable, more subtle shadow */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24"> {/* Slightly increased height */}
+        <div className="flex justify-between items-center h-20 md:h-24"> {/* Slightly reduced height for modern feel */}
           {/* Logo Section */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center" onClick={closeAllMenus}>
-              {/* Replace with your actual logo image */}
               <img
-                src="https://placehold.co/60x60/primary-blue/neutral-light?text=LOGO" // Placeholder logo, consider a high-res hotel logo
+                src="./wolf.png" // Using the provided wolf.png
                 alt="The Lake Mount Hotel Logo"
-                className="h-14 w-auto mr-3 rounded-full shadow-md" // Larger, rounded logo with shadow
+                className="h-16 md:h-20 w-auto rounded-full shadow-md transition-transform duration-300 hover:scale-105" // Larger, more prominent logo
               />
-              <span className="text-3xl font-extrabold text-neutral-dark tracking-wide">The Lake Mount</span> {/* Larger, bolder text, tracking */}
             </Link>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8 xl:space-x-10"> {/* Adjusted spacing */}
+          {/* Desktop Navigation Links (only 5 visible) */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-8 xl:space-x-10">
             <NavLink
               to="/"
               onClick={closeAllMenus}
               className={({ isActive }) =>
-                `text-lg font-medium hover:text-primary-blue transition-colors duration-200 py-2
-                ${isActive ? 'text-primary-blue border-b-2 border-primary-blue' : 'text-text-dark'}` // Branded active/hover states
+                `text-lg font-medium hover:text-[var(--color-primary-brown)] transition-colors duration-200 py-2
+                ${isActive ? 'text-[var(--color-primary-brown)] border-b-2 border-[var(--color-primary-brown)]' : 'text-[var(--color-text-dark)]'}`
               }
             >
               Home
             </NavLink>
 
-            {/* Our Hotel Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setIsHotelDropdownOpen(true)} // Open on hover
-              onMouseLeave={() => setIsHotelDropdownOpen(false)} // Close on mouse leave
+            <NavLink
+              to="/about"
+              onClick={closeAllMenus}
+              className={({ isActive }) =>
+                `text-lg font-medium hover:text-[var(--color-primary-brown)] transition-colors duration-200 py-2
+                ${isActive ? 'text-[var(--color-primary-brown)] border-b-2 border-[var(--color-primary-brown)]' : 'text-[var(--color-text-dark)]'}`
+              }
             >
-              <button
-                onClick={() => toggleDropdown(setIsHotelDropdownOpen, isHotelDropdownOpen)}
-                className="text-lg font-medium text-text-dark hover:text-primary-blue transition-colors duration-200 py-2 flex items-center focus:outline-none" // Branded hover
-              >
-                Our Hotel
-                <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isHotelDropdownOpen ? 'rotate-180' : ''}`}></i>
-              </button>
-              <div
-                className={`absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-2xl py-2 border border-border-light ${isHotelDropdownOpen ? 'block animate-fade-in-down' : 'hidden'} origin-top-left`} // Premium dropdown styling, added animate-fade-in-down
-              >
-                <Link to="/about" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  About Us
-                </Link>
-                <Link to="/amenities" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Amenities
-                </Link>
-                <Link to="/testimonials" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Testimonials
-                </Link>
-              </div>
-            </div>
+              About Us
+            </NavLink>
 
             <NavLink
               to="/rooms"
               onClick={closeAllMenus}
               className={({ isActive }) =>
-                `text-lg font-medium hover:text-primary-blue transition-colors duration-200 py-2
-                ${isActive ? 'text-primary-blue border-b-2 border-primary-blue' : 'text-text-dark'}` // Branded active/hover states
+                `text-lg font-medium hover:text-[var(--color-primary-brown)] transition-colors duration-200 py-2
+                ${isActive ? 'text-[var(--color-primary-brown)] border-b-2 border-[var(--color-primary-brown)]' : 'text-[var(--color-text-dark)]'}`
               }
             >
-              Rooms
+              Rooms & Booking
             </NavLink>
 
-            {/* Dining Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setIsDiningDropdownOpen(true)}
-              onMouseLeave={() => setIsDiningDropdownOpen(false)}
+            <NavLink
+              to="/restaurant"
+              onClick={closeAllMenus}
+              className={({ isActive }) =>
+                `text-lg font-medium hover:text-[var(--color-primary-brown)] transition-colors duration-200 py-2
+                ${isActive ? 'text-[var(--color-primary-brown)] border-b-2 border-[var(--color-primary-brown)]' : 'text-[var(--color-text-dark)]'}`
+              }
             >
-              <button
-                onClick={() => toggleDropdown(setIsDiningDropdownOpen, isDiningDropdownOpen)}
-                className="text-lg font-medium text-text-dark hover:text-primary-blue transition-colors duration-200 py-2 flex items-center focus:outline-none" // Branded hover
-              >
-                Dining
-                <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isDiningDropdownOpen ? 'rotate-180' : ''}`}></i>
-              </button>
-              <div
-                className={`absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-2xl py-2 border border-border-light ${isDiningDropdownOpen ? 'block animate-fade-in-down' : 'hidden'} origin-top-left`} // Premium dropdown styling
-              >
-                <Link to="/restaurant" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Restaurant
-                </Link>
-                <Link to="/cafe" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Cafe
-                </Link>
-              </div>
-            </div>
-
-            {/* Explore Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setIsExploreDropdownOpen(true)}
-              onMouseLeave={() => setIsExploreDropdownOpen(false)}
-            >
-              <button
-                onClick={() => toggleDropdown(setIsExploreDropdownOpen, isExploreDropdownOpen)}
-                className="text-lg font-medium text-text-dark hover:text-primary-blue transition-colors duration-200 py-2 flex items-center focus:outline-none" // Branded hover
-              >
-                Explore
-                <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isExploreDropdownOpen ? 'rotate-180' : ''}`}></i>
-              </button>
-              <div
-                className={`absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-2xl py-2 border border-border-light ${isExploreDropdownOpen ? 'block animate-fade-in-down' : 'hidden'} origin-top-left`} // Premium dropdown styling
-              >
-                <Link to="/gallery" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Gallery
-                </Link>
-                <Link to="/explore-nearby" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Explore Nearby
-                </Link>
-                <Link to="/blog" onClick={closeAllMenus} className="block px-4 py-3 text-text-dark hover:bg-primary-blue hover:text-neutral-light transition-colors duration-200"> {/* Branded hover, increased padding */}
-                  Blog
-                </Link>
-              </div>
-            </div>
+              Restaurant
+            </NavLink>
 
             <NavLink
               to="/contact"
               onClick={closeAllMenus}
               className={({ isActive }) =>
-                `text-lg font-medium hover:text-primary-blue transition-colors duration-200 py-2
-                ${isActive ? 'text-primary-blue border-b-2 border-primary-blue' : 'text-text-dark'}` // Branded active/hover states
+                `text-lg font-medium hover:text-[var(--color-primary-brown)] transition-colors duration-200 py-2
+                ${isActive ? 'text-[var(--color-primary-brown)] border-b-2 border-[var(--color-primary-brown)]' : 'text-[var(--color-text-dark)]'}`
               }
             >
-              Contact
+              Contact Us
             </NavLink>
           </div>
 
@@ -173,7 +93,7 @@ function Navbar() {
             <Link
               to="/rooms"
               onClick={closeAllMenus}
-              className="ml-8 px-8 py-3 bg-secondary-gold text-neutral-dark rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 shadow-lg transform hover:-translate-y-0.5" // Premium button style
+              className="ml-8 px-8 py-3 bg-[var(--color-secondary-gold)] text-[var(--color-neutral-dark)] rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 shadow-lg transform hover:-translate-y-0.5"
             >
               Book Now
             </Link>
@@ -184,15 +104,14 @@ function Navbar() {
             <button
               onClick={toggleMobileMenu}
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-dark hover:text-primary-blue hover:bg-neutral-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-blue" // Branded mobile button
+              className="inline-flex items-center justify-center p-2 rounded-md text-[var(--color-neutral-dark)] hover:text-[var(--color-primary-brown)] hover:bg-[var(--color-neutral-light)] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--color-primary-brown)]"
               aria-controls="mobile-menu"
               aria-expanded={isMobileMenuOpen ? "true" : "false"}
             >
               <span className="sr-only">Open main menu</span>
-              {/* Icon when menu is closed */}
               {!isMobileMenuOpen ? (
                 <svg
-                  className="block h-8 w-8" // Larger icon
+                  className="block h-8 w-8"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -207,9 +126,8 @@ function Navbar() {
                   />
                 </svg>
               ) : (
-                /* Icon when menu is open */
                 <svg
-                  className="block h-8 w-8" // Larger icon
+                  className="block h-8 w-8"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -229,104 +147,136 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Panel */}
-      <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} lg:hidden bg-neutral-light border-t border-border-light shadow-lg`} id="mobile-menu"> {/* Premium mobile menu styling */}
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {/* Mobile Menu Panel (All links visible) */}
+      <div className={`fixed inset-y-0 left-0 w-64 bg-[var(--color-neutral-light)] border-r border-[var(--color-border-light)] shadow-lg transform transition-transform duration-300 ease-in-out z-40 lg:hidden
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`} id="mobile-menu">
+        <div className="px-2 pt-20 pb-3 space-y-1 sm:px-3"> {/* Adjusted padding for logo space */}
           <NavLink
             to="/"
             onClick={closeAllMenus}
             className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium
-              ${isActive ? 'bg-primary-blue text-neutral-light' : 'text-text-dark hover:bg-primary-blue hover:text-neutral-light'}` // Branded active/hover states
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
             }
           >
             Home
           </NavLink>
 
-          {/* Mobile "Our Hotel" accordion/dropdown */}
-          <button
-            onClick={() => toggleDropdown(setIsHotelDropdownOpen, isHotelDropdownOpen)}
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-dark hover:bg-primary-blue hover:text-neutral-light flex justify-between items-center" // Branded hover
+          <NavLink
+            to="/about"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
           >
-            Our Hotel
-            <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isHotelDropdownOpen ? 'rotate-180' : ''}`}></i>
-          </button>
-          <div className={`${isHotelDropdownOpen ? 'block' : 'hidden'} pl-6 space-y-1`}>
-            <Link to="/about" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              About Us
-            </Link>
-            <Link to="/amenities" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Amenities
-            </Link>
-            <Link to="/testimonials" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Testimonials
-            </Link>
-          </div>
+            About Us
+          </NavLink>
 
           <NavLink
             to="/rooms"
             onClick={closeAllMenus}
             className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium
-              ${isActive ? 'bg-primary-blue text-neutral-light' : 'text-text-dark hover:bg-primary-blue hover:text-neutral-light'}` // Branded active/hover states
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
             }
           >
-            Rooms
+            Rooms & Booking
           </NavLink>
 
-          {/* Mobile "Dining" accordion/dropdown */}
-          <button
-            onClick={() => toggleDropdown(setIsDiningDropdownOpen, isDiningDropdownOpen)}
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-dark hover:bg-primary-blue hover:text-neutral-light flex justify-between items-center" // Branded hover
+          <NavLink
+            to="/restaurant"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
           >
-            Dining
-            <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isDiningDropdownOpen ? 'rotate-180' : ''}`}></i>
-          </button>
-          <div className={`${isDiningDropdownOpen ? 'block' : 'hidden'} pl-6 space-y-1`}>
-            <Link to="/restaurant" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Restaurant
-            </Link>
-            <Link to="/cafe" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Cafe
-            </Link>
-          </div>
+            Restaurant
+          </NavLink>
 
-          {/* Mobile "Explore" accordion/dropdown */}
-          <button
-            onClick={() => toggleDropdown(setIsExploreDropdownOpen, isExploreDropdownOpen)}
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-dark hover:bg-primary-blue hover:text-neutral-light flex justify-between items-center" // Branded hover
+          <NavLink
+            to="/cafe"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
           >
-            Explore
-            <i className={`fas fa-chevron-down ml-2 text-sm transition-transform duration-200 ${isExploreDropdownOpen ? 'rotate-180' : ''}`}></i>
-          </button>
-          <div className={`${isExploreDropdownOpen ? 'block' : 'hidden'} pl-6 space-y-1`}>
-            <Link to="/gallery" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Gallery
-            </Link>
-            <Link to="/explore-nearby" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Explore Nearby
-            </Link>
-            <Link to="/blog" onClick={closeAllMenus} className="block px-3 py-2 text-text-dark hover:bg-primary-blue hover:text-neutral-light rounded-md"> {/* Branded hover */}
-              Blog
-            </Link>
-          </div>
+            The Lake Mount Café
+          </NavLink>
+
+          <NavLink
+            to="/amenities"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
+          >
+            Amenities
+          </NavLink>
+
+          <NavLink
+            to="/gallery"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
+          >
+            Gallery
+          </NavLink>
+
+          <NavLink
+            to="/explore-nearby"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
+          >
+            Explore Nearby
+          </NavLink>
 
           <NavLink
             to="/contact"
             onClick={closeAllMenus}
             className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium
-              ${isActive ? 'bg-primary-blue text-neutral-light' : 'text-text-dark hover:bg-primary-blue hover:text-neutral-light'}` // Branded active/hover states
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
             }
           >
-            Contact
+            Contact Us
+          </NavLink>
+
+          <NavLink
+            to="/testimonials"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
+          >
+            Testimonials
+          </NavLink>
+
+          <NavLink
+            to="/blog"
+            onClick={closeAllMenus}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium
+              ${isActive ? 'bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)]' : 'text-[var(--color-text-dark)] hover:bg-[var(--color-primary-brown)] hover:text-[var(--color-neutral-light)]'}`
+            }
+          >
+            Blog
           </NavLink>
 
           {/* Book Now Button for mobile */}
           <Link
-            to="/rooms" // Or to your specific booking form page
+            to="/rooms"
             onClick={closeAllMenus}
-            className="block w-full text-center mt-4 px-3 py-2 bg-secondary-gold text-neutral-dark rounded-full text-base font-semibold hover:bg-opacity-90 transition-colors duration-300 shadow-md" // Premium mobile button style
+            className="block w-full text-center mt-4 px-3 py-2 bg-[var(--color-secondary-gold)] text-[var(--color-neutral-dark)] rounded-full text-base font-semibold hover:bg-opacity-90 transition-colors duration-300 shadow-md"
           >
             Book Now
           </Link>

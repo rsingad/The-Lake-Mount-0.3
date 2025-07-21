@@ -74,8 +74,8 @@ function RoomDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-neutral-light">
-        <div className="text-2xl font-semibold text-primary-blue animate-pulse">Loading Room Details...</div>
+      <div className="flex justify-center items-center h-screen bg-[var(--color-neutral-light)]"> {/* Uses CSS variable */}
+        <div className="text-2xl font-semibold text-[var(--color-primary-brown)] animate-pulse">Loading Room Details...</div> {/* Uses CSS variable */}
       </div>
     );
   }
@@ -84,7 +84,7 @@ function RoomDetailPage() {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-red-50 text-red-700 p-8 text-center">
         <p className="text-3xl font-bold mb-4">{error}</p>
-        <Link to="/rooms" className="text-primary-blue hover:underline text-lg font-medium">
+        <Link to="/rooms" className="text-[var(--color-primary-brown)] hover:underline text-lg font-medium"> {/* Uses CSS variable */}
           Go back to All Rooms
         </Link>
       </div>
@@ -93,9 +93,9 @@ function RoomDetailPage() {
 
   if (!room) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-neutral-light text-text-dark p-8 text-center">
+      <div className="flex flex-col justify-center items-center h-screen bg-[var(--color-neutral-light)] text-[var(--color-text-dark)] p-8 text-center"> {/* Uses CSS variables */}
         <p className="text-3xl font-bold mb-4">No room data available.</p>
-        <Link to="/rooms" className="text-primary-blue hover:underline text-lg font-medium">
+        <Link to="/rooms" className="text-[var(--color-primary-brown)] hover:underline text-lg font-medium"> {/* Uses CSS variable */}
           Go back to All Rooms
         </Link>
       </div>
@@ -103,18 +103,18 @@ function RoomDetailPage() {
   }
 
   return (
-    <div className="bg-neutral-light min-h-screen font-sans">
+    <div className="bg-[var(--color-neutral-light)] min-h-screen font-sans"> {/* Uses CSS variable */}
       {/* Hero Section */}
       <section
-        className="relative h-96 md:h-[550px] bg-cover bg-center flex items-end pb-16 text-white overflow-hidden" // Increased height, padding
+        className="relative h-96 md:h-[550px] bg-cover bg-center flex items-end pb-16 text-white overflow-hidden"
         style={{ backgroundImage: `url(${room.image})` }}
       >
-        <div className="absolute inset-0 bg-neutral-dark opacity-60"></div> {/* Darker, richer overlay */}
+        <div className="absolute inset-0 bg-[var(--color-neutral-dark)] opacity-60"></div> {/* Uses CSS variables */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-2xl leading-tight tracking-wider animate-fade-in-up"> {/* Larger, bolder, animated */}
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-2xl leading-tight tracking-wider animate-fade-in-up">
             {room.name}
           </h1>
-          <p className="text-xl md:text-2xl font-light drop-shadow-xl max-w-3xl animate-fade-in-up delay-100">{room.description}</p> {/* Lighter font, animated */}
+          <p className="text-xl md:text-2xl font-light drop-shadow-xl max-w-3xl animate-fade-in-up delay-100">{room.description}</p>
         </div>
       </section>
 
@@ -123,37 +123,37 @@ function RoomDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Text Content */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-neutral-dark mb-6 relative pb-4">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-neutral-dark)] mb-6 relative pb-4"> {/* Uses CSS variables */}
               <span className="relative z-10">About the {room.name}</span>
-              <span className="absolute -bottom-0 left-0 w-28 h-2 bg-secondary-gold rounded-full opacity-80"></span> {/* Gold underline */}
+              <span className="absolute -bottom-0 left-0 w-28 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span> {/* Uses CSS variable */}
             </h2>
-            <p className="text-text-dark text-lg leading-relaxed mb-8">
+            <p className="text-[var(--color-text-dark)] text-lg leading-relaxed mb-8"> {/* Uses CSS variable */}
               {room.fullDescription}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10"> {/* Increased gap */}
-              <div className="flex items-center text-text-dark text-lg p-3 bg-neutral-light rounded-lg shadow-sm border border-border-light"> {/* Card style for details */}
-                <i className="fas fa-expand-arrows-alt text-primary-blue text-2xl mr-4"></i>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+              <div className="flex items-center text-[var(--color-text-dark)] text-lg p-3 bg-[var(--color-neutral-light)] rounded-lg shadow-sm border border-[var(--color-border-light)]"> {/* Uses CSS variables */}
+                <i className="fas fa-expand-arrows-alt text-[var(--color-primary-brown)] text-2xl mr-4"></i> {/* Uses CSS variables */}
                 <span className="font-semibold">Size:</span> <span className="ml-1">{room.size}</span>
               </div>
-              <div className="flex items-center text-text-dark text-lg p-3 bg-neutral-light rounded-lg shadow-sm border border-border-light">
-                <i className="fas fa-users text-primary-blue text-2xl mr-4"></i>
+              <div className="flex items-center text-[var(--color-text-dark)] text-lg p-3 bg-[var(--color-neutral-light)] rounded-lg shadow-sm border border-[var(--color-border-light)]"> {/* Uses CSS variables */}
+                <i className="fas fa-users text-[var(--color-primary-brown)] text-2xl mr-4"></i> {/* Uses CSS variables */}
                 <span className="font-semibold">Capacity:</span> <span className="ml-1">{room.capacity}</span>
               </div>
-              <div className="flex items-center text-text-dark text-lg p-3 bg-neutral-light rounded-lg shadow-sm border border-border-light">
-                <i className="fas fa-dollar-sign text-primary-blue text-2xl mr-4"></i>
-                <span className="font-semibold">Price per night:</span> <span className="ml-1">₹{room.price.toLocaleString('en-IN')}</span> {/* Formatted price */}
+              <div className="flex items-center text-[var(--color-text-dark)] text-lg p-3 bg-[var(--color-neutral-light)] rounded-lg shadow-sm border border-[var(--color-border-light)]"> {/* Uses CSS variables */}
+                <i className="fas fa-dollar-sign text-[var(--color-primary-brown)] text-2xl mr-4"></i> {/* Uses CSS variables */}
+                <span className="font-semibold">Price per night:</span> <span className="ml-1">₹{room.price.toLocaleString('en-IN')}</span>
               </div>
             </div>
 
-            <h3 className="text-3xl font-extrabold text-neutral-dark mb-6 relative pb-3">
+            <h3 className="text-3xl font-extrabold text-[var(--color-neutral-dark)] mb-6 relative pb-3"> {/* Uses CSS variables */}
               <span className="relative z-10">Room Amenities</span>
-              <span className="absolute -bottom-0 left-0 w-24 h-1.5 bg-primary-blue rounded-full opacity-80"></span> {/* Blue underline */}
+              <span className="absolute -bottom-0 left-0 w-24 h-1.5 bg-[var(--color-primary-brown)] rounded-full opacity-80"></span> {/* Uses CSS variables */}
             </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-text-dark text-lg">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[var(--color-text-dark)] text-lg"> {/* Uses CSS variables */}
               {room.amenities && room.amenities.map((amenity, index) => (
-                <li key={index} className="flex items-center p-2 bg-neutral-light rounded-md border border-border-light shadow-sm"> {/* Amenity item styling */}
-                  <i className="fas fa-check-circle text-secondary-gold mr-3 text-xl"></i> {/* Gold checkmark */}
+                <li key={index} className="flex items-center p-2 bg-[var(--color-neutral-light)] rounded-md border border-[var(--color-border-light)] shadow-sm"> {/* Uses CSS variables */}
+                  <i className="fas fa-check-circle text-[var(--color-secondary-gold)] mr-3 text-xl"></i> {/* Uses CSS variables */}
                   {amenity}
                 </li>
               ))}
@@ -161,17 +161,16 @@ function RoomDetailPage() {
           </div>
 
           {/* Booking/Inquiry Form - Now using the BookingForm component */}
-          {/* The BookingForm component will handle its own internal state and steps */}
           <BookingForm initialRoom={room} />
         </div>
       </section>
 
       {/* Back to Rooms Section */}
-      <section className="py-16 bg-gradient-to-r from-primary-blue to-neutral-dark text-white text-center">
+      <section className="py-16 bg-gradient-to-r from-[var(--color-primary-brown)] to-[var(--color-neutral-dark)] text-[var(--color-neutral-light)] text-center"> {/* Uses CSS variables */}
         <div className="max-w-4xl mx-auto px-4">
           <Link
             to="/rooms"
-            className="inline-flex items-center hover:bg-black hover:text-white text-black text-neutral-dark px-10 py-4 rounded-full text-lg font-bold hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-xl tracking-wide"
+            className="inline-flex items-center bg-[var(--color-secondary-gold)] text-[var(--color-neutral-dark)] px-10 py-4 rounded-full text-lg font-bold hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-xl tracking-wide" 
           >
             <i className="fas fa-arrow-left mr-3"></i> Back to All Rooms
           </Link>

@@ -1,0 +1,57 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  /* Custom Colors */
+  --color-neutral-light: #F8F4E1;
+  --color-secondary-gold: #FEBA17;
+  --color-primary-brown: #74512D;
+  --color-neutral-dark: #4E1F00;
+  --color-text-dark: #4E1F00;
+  --color-border-light: #E5DED5;
+}
+
+/* You can also define utility classes here if you prefer,
+   but using [var(--color-name)] directly in Tailwind is common. */
+/* Example:
+.bg-neutral-light-custom {
+  background-color: var(--color-neutral-light);
+}
+*/
+
+/* Custom animations for the project */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  70% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply animations directly if needed, or use Tailwind's animation utility classes */
+/* .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; } */
+/* .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; } */
+/* .animate-bounce-in { animation: bounceIn 0.8s ease-out forwards; } */
+/* .animate-fade-in-down { animation: fadeInDown 0.3s ease-out forwards; } */
+

@@ -26,7 +26,7 @@ function BookingForm({ initialRoom = null }) {
     { _id: '4', name: 'Presidential Lakefront Villa', price: 50000, maxGuests: 4, description: 'The epitome of luxury, featuring multiple rooms, a private dining area, and personalized butler service with stunning lakefront views.', image: 'https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' }
   ];
 
-  const [availableRoomTypes, setAvailableRoomTypes] = useState(staticRoomTypes);
+  const [availableRoomTypes] = useState(staticRoomTypes); // Changed to const as it's static
   const [availableRoomForBooking, setAvailableRoomForBooking] = useState(null); // Selected room after availability check
 
   // Effect to set initial room if provided (e.g., from RoomDetailPage)
@@ -154,10 +154,10 @@ function BookingForm({ initialRoom = null }) {
   const minCheckOut = checkIn ? new Date(new Date(checkIn).setDate(new Date(checkIn).getDate() + 1)).toISOString().split('T')[0] : today;
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-2xl shadow-3xl text-center border border-border-light font-sans"> {/* Premium styling */}
-      <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-dark mb-8 relative pb-4"> {/* Premium heading style */}
+    <div className="bg-white p-6 md:p-10 rounded-2xl shadow-3xl text-center border border-[var(--color-border-light)] font-sans"> {/* Uses CSS variable */}
+      <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--color-neutral-dark)] mb-8 relative pb-4"> {/* Uses CSS variable */}
         <span className="relative z-10">Plan Your Perfect Stay</span>
-        <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-secondary-gold rounded-full opacity-80"></span>
+        <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-28 h-2 bg-[var(--color-secondary-gold)] rounded-full opacity-80"></span> {/* Uses CSS variable */}
       </h2>
 
       {/* Process Stepper */}
@@ -169,7 +169,7 @@ function BookingForm({ initialRoom = null }) {
             message.type === 'success'
               ? 'bg-green-50 text-green-800 border border-green-200'
               : 'bg-red-50 text-red-800 border border-red-200'
-          } my-4 animate-fade-in`} // Enhanced styling and animation, changed mb-4 to my-4
+          } my-4 animate-fade-in`}
           role="alert"
         >
           {message.text}
@@ -178,9 +178,9 @@ function BookingForm({ initialRoom = null }) {
 
       {/* Step 0: Select Details Form */}
       {currentStep === 0 && (
-        <form onSubmit={handleAvailabilityCheck} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 items-end animate-fade-in"> {/* Changed to lg:grid-cols-4, added items-end */}
+        <form onSubmit={handleAvailabilityCheck} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 items-end animate-fade-in">
           <div className="flex flex-col items-start">
-            <label htmlFor="checkIn" className="font-semibold text-text-dark mb-2 text-lg">Check-in Date:</label> {/* Darker text, larger font */}
+            <label htmlFor="checkIn" className="font-semibold text-[var(--color-text-dark)] mb-3 text-lg">Check-in Date:</label> {/* Uses CSS variable */}
             <input
               type="date"
               id="checkIn"
@@ -188,11 +188,11 @@ function BookingForm({ initialRoom = null }) {
               onChange={(e) => setCheckIn(e.target.value)}
               required
               min={today}
-              className="w-full p-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 shadow-sm text-text-dark" // Premium input styling
+              className="w-full p-3.5 border border-[var(--color-border-light)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 shadow-sm text-[var(--color-text-dark)]" 
             />
           </div>
           <div className="flex flex-col items-start">
-            <label htmlFor="checkOut" className="font-semibold text-text-dark mb-2 text-lg">Check-out Date:</label> {/* Darker text, larger font */}
+            <label htmlFor="checkOut" className="font-semibold text-[var(--color-text-dark)] mb-3 text-lg">Check-out Date:</label> {/* Uses CSS variable */}
             <input
               type="date"
               id="checkOut"
@@ -200,11 +200,11 @@ function BookingForm({ initialRoom = null }) {
               onChange={(e) => setCheckOut(e.target.value)}
               required
               min={minCheckOut}
-              className="w-full p-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 shadow-sm text-text-dark" // Premium input styling
+              className="w-full p-3.5 border border-[var(--color-border-light)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 shadow-sm text-[var(--color-text-dark)]" 
             />
           </div>
           <div className="flex flex-col items-start">
-            <label htmlFor="guests" className="font-semibold text-text-dark mb-2 text-lg">Number of Guests:</label> {/* Darker text, larger font */}
+            <label htmlFor="guests" className="font-semibold text-[var(--color-text-dark)] mb-3 text-lg">Number of Guests:</label> {/* Uses CSS variable */}
             <input
               type="number"
               id="guests"
@@ -212,19 +212,19 @@ function BookingForm({ initialRoom = null }) {
               onChange={(e) => setGuests(parseInt(e.target.value) || 1)}
               min="1"
               required
-              max={initialRoom ? parseInt(initialRoom.capacity.split(' ')[0]) : 10} // Set max guests based on initialRoom or a default
-              className="w-full p-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 shadow-sm text-text-dark" // Premium input styling
+              max={initialRoom ? parseInt(initialRoom.capacity.split(' ')[0]) : 10}
+              className="w-full p-3.5 border border-[var(--color-border-light)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 shadow-sm text-[var(--color-text-dark)]" 
             />
           </div>
           <div className="flex flex-col items-start">
-            <label htmlFor="roomType" className="font-semibold text-text-dark mb-2 text-lg">Room Type:</label> {/* Darker text, larger font */}
+            <label htmlFor="roomType" className="font-semibold text-[var(--color-text-dark)] mb-3 text-lg">Room Type:</label> {/* Uses CSS variable */}
             <select
               id="roomType"
               value={selectedRoomTypeId}
               onChange={(e) => setSelectedRoomTypeId(e.target.value)}
               required
-              disabled={!!initialRoom} // Disable if initialRoom is provided
-              className={`w-full p-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent transition-all duration-300 shadow-sm bg-white text-text-dark ${initialRoom ? 'bg-gray-100 cursor-not-allowed' : ''}`} // Premium select styling, disabled style
+              disabled={!!initialRoom}
+              className={`w-full p-3.5 border border-[var(--color-border-light)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:border-transparent transition-all duration-300 shadow-sm bg-white text-[var(--color-text-dark)] ${initialRoom ? 'bg-[var(--color-neutral-light)] cursor-not-allowed' : ''}`} 
             >
               <option value="">Select a Room Type</option>
               {availableRoomTypes.map(type => (
@@ -235,39 +235,38 @@ function BookingForm({ initialRoom = null }) {
           <button
             type="submit"
             disabled={loading}
-            className="md:col-span-2 lg:col-span-4 bg-primary-blue text-neutral-light px-8 py-3 rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5" // Premium button styling
+            className="md:col-span-2 lg:col-span-4 bg-[var(--color-primary-brown)] text-[var(--color-neutral-light)] px-8 py-3 rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-brown)] focus:ring-offset-2" 
           >
             {loading ? 'Checking Availability...' : 'Check Availability'}
           </button>
         </form>
       )}
 
-
       {/* Step 1: Confirm & Pay Section */}
       {currentStep === 1 && availableRoomForBooking && (
-        <div className="bg-neutral-light p-6 rounded-xl border border-border-light mt-6 text-left shadow-md animate-fade-in"> {/* Premium confirmation styling */}
-          <h3 className="text-2xl font-extrabold text-neutral-dark mb-4 text-center relative pb-3">
+        <div className="bg-[var(--color-neutral-light)] p-6 rounded-xl border border-[var(--color-border-light)] mt-6 text-left shadow-md animate-fade-in"> {/* Uses CSS variables */}
+          <h3 className="text-2xl font-extrabold text-[var(--color-neutral-dark)] mb-4 text-center relative pb-3"> {/* Uses CSS variable */}
             <span className="relative z-10">Confirm Your Booking</span>
-            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-primary-blue rounded-full opacity-80"></span>
+            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-[var(--color-primary-brown)] rounded-full opacity-80"></span> {/* Uses CSS variable */}
           </h3>
           {/* Display Room Image */}
           {availableRoomForBooking.roomType.image && (
             <img
               src={availableRoomForBooking.roomType.image}
               alt={availableRoomForBooking.roomType.name}
-              className="w-full h-48 object-cover rounded-lg mb-4 shadow-md"
+              className="w-full h-56 object-cover rounded-lg mb-4 shadow-md border border-[var(--color-border-light)]" 
             />
           )}
-          <p className="text-text-dark mb-2">You have selected the <strong className="text-primary-blue">{availableRoomForBooking.roomType.name}</strong>.</p>
-          <p className="text-text-dark mb-2">For <strong className="text-primary-blue">{calculateNights(checkIn, checkOut)} nights</strong> from <strong className="text-primary-blue">{new Date(checkIn).toLocaleDateString('en-IN')}</strong> to <strong className="text-primary-blue">{new Date(checkOut).toLocaleDateString('en-IN')}</strong>.</p>
-          <p className="text-text-dark mb-4">For <strong className="text-primary-blue">{guests} guests</strong>.</p>
-          <p className="text-2xl font-bold text-secondary-gold mt-4 text-center">
-            Total Price: ₹{ ( (availableRoomForBooking.roomType.price || availableRoomForBooking.roomType.pricePerNight) * calculateNights(checkIn, checkOut)).toLocaleString('en-IN')}
+          <p className="text-[var(--color-text-dark)] mb-2">You have selected the <strong className="text-[var(--color-primary-brown)]">{availableRoomForBooking.roomType.name}</strong>.</p> {/* Uses CSS variable */}
+          <p className="text-[var(--color-text-dark)] mb-2">For <strong className="text-[var(--color-primary-brown)]">{calculateNights(checkIn, checkOut)} nights</strong> from <strong className="text-[var(--color-primary-brown)]">{new Date(checkIn).toLocaleDateString('en-IN')}</strong> to <strong className="text-[var(--color-primary-brown)]">{new Date(checkOut).toLocaleDateString('en-IN')}</strong>.</p> {/* Uses CSS variable */}
+          <p className="text-[var(--color-text-dark)] mb-4">For <strong className="text-[var(--color-primary-brown)]">{guests} guests</strong>.</p> {/* Uses CSS variable */}
+          <p className="text-3xl font-bold text-[var(--color-secondary-gold)] mt-4 text-center"> {/* Uses CSS variable */}
+            Total Price: ₹{( (availableRoomForBooking.roomType.price || availableRoomForBooking.roomType.pricePerNight) * calculateNights(checkIn, checkOut)).toLocaleString('en-IN')}
           </p>
           <button
-            onClick={handleProceedToPayment} // New handler to show payment section
+            onClick={handleProceedToPayment}
             disabled={loading}
-            className="w-full mt-6 bg-secondary-gold text-neutral-dark px-8 py-3 rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5" // Premium button styling
+            className="w-full mt-6 bg-[var(--color-secondary-gold)] text-[var(--color-neutral-dark)] px-8 py-3 rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-gold)] focus:ring-offset-2" 
           >
             Proceed to Payment
           </button>
@@ -276,34 +275,34 @@ function BookingForm({ initialRoom = null }) {
 
       {/* Step 2: Payment Section */}
       {currentStep === 2 && availableRoomForBooking && (
-        <div className="bg-neutral-light p-6 rounded-xl border border-border-light mt-6 text-left shadow-md animate-fade-in">
-          <h3 className="text-2xl font-extrabold text-neutral-dark mb-4 text-center relative pb-3">
+        <div className="bg-[var(--color-neutral-light)] p-6 rounded-xl border border-[var(--color-border-light)] mt-6 text-left shadow-md animate-fade-in"> {/* Uses CSS variable */}
+          <h3 className="text-2xl font-extrabold text-[var(--color-neutral-dark)] mb-4 text-center relative pb-3"> {/* Uses CSS variable */}
             <span className="relative z-10">Complete Your Payment</span>
-            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-primary-blue rounded-full opacity-80"></span>
+            <span className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1.5 bg-[var(--color-primary-brown)] rounded-full opacity-80"></span> {/* Uses CSS variable */}
           </h3>
-          <p className="text-text-dark mb-4 text-center">Scan the QR code or use the UPI ID below to complete your payment of <strong className="text-secondary-gold">₹{( (availableRoomForBooking.roomType.price || availableRoomForBooking.roomType.pricePerNight) * calculateNights(checkIn, checkOut)).toLocaleString('en-IN')}</strong>.</p>
+          <p className="text-[var(--color-text-dark)] mb-4 text-center">Scan the QR code or use the UPI ID below to complete your payment of <strong className="text-[var(--color-secondary-gold)]">₹{( (availableRoomForBooking.roomType.price || availableRoomForBooking.roomType.pricePerNight) * calculateNights(checkIn, checkOut)).toLocaleString('en-IN')}</strong>.</p> {/* Uses CSS variable */}
 
           <div className="flex flex-col items-center justify-center space-y-4 mb-6">
             <img
               src="https://placehold.co/200x200/000000/FFFFFF?text=QR+Code" // Placeholder QR code image
               alt="Payment QR Code"
-              className="w-48 h-48 rounded-lg border border-border-light shadow-md"
+              className="w-56 h-56 rounded-lg border-2 border-[var(--color-primary-brown)] shadow-md" 
             />
-            <p className="text-text-dark text-lg font-semibold">UPI ID: <span className="text-primary-blue">lakemount@upi</span></p>
-            <p className="text-text-dark text-sm opacity-80">Please ensure the correct amount is paid.</p>
+            <p className="text-[var(--color-text-dark)] text-xl font-bold">UPI ID: <span className="text-[var(--color-primary-brown)]">lakemount@upi</span></p> {/* Uses CSS variable */}
+            <p className="text-[var(--color-text-dark)] text-sm opacity-80">Please ensure the correct amount is paid.</p> {/* Uses CSS variable */}
           </div>
 
           <button
             onClick={handlePaymentDone}
             disabled={loading}
-            className="w-full mt-6 bg-green-600 text-white px-8 py-3 rounded-full text-lg font-bold hover:bg-green-700 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5"
+            className="w-full mt-6 bg-green-600 text-white px-8 py-3 rounded-full text-lg font-bold hover:bg-green-700 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-xl transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
           >
             {loading ? 'Processing Payment...' : 'I Have Paid'}
           </button>
           <button
             onClick={() => setCurrentStep(1)} // Go back to confirmation step
             disabled={loading}
-            className="w-full mt-4 bg-gray-300 text-text-dark px-8 py-3 rounded-full text-lg font-bold hover:bg-gray-400 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
+            className="w-full mt-4 bg-gray-300 text-[var(--color-text-dark)] px-8 py-3 rounded-full text-lg font-bold hover:bg-gray-400 transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2" 
           >
             Go Back
           </button>
